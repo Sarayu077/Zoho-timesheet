@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zoho Timesheet Task Manager</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="dark-theme">
+  <div class="app">
+    <aside class="sidebar" id="sidebar">
+      <div class="toggle-btn" onclick="toggleSidebar()">☰</div>
+      <h2>🗂️</h2>
+      <ul>
+        <li onclick="showSection('dashboard')">
+          🗒️ <span class="nav-label">Analysis</span>
+        </li>
+        <li onclick="showSection('tasks')">
+          📝 <span class="nav-label">Task Manager</span>
+        </li>
+        <li onclick="showSection('feedback')">
+          💬 <span class="nav-label">Feedback</span>
+        </li>
+      </ul>
+
+      <div class="theme-toggle">
+        <label>
+          <input type="checkbox" id="themeSwitch" />
+          <span class="slider"></span>
+        </label>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <nav class="top-nav">
+        <h1>Zoho Timesheet Task Manager</h1>
+        <span id="sectionTitle">Analysis</span>
+      </nav>
+
+      <section id="dashboard" class="section">
+  <h2>📈 Work vs Break Time</h2>
+  <div class="chart">
+    <div class="bar" style="height: 80%">10h<br /><span>Work</span></div>
+    <div class="bar" style="height: 20%">2h<br /><span>Break</span></div>
+  </div>
+
+  <hr style="margin: 30px 0" />
+
+  <h2>📈 Task KPIs</h2>
+  <div class="kpi-container">
+    <div class="kpi-item">
+      <div class="kpi-value" id="totalTasks">0</div>
+      <div class="kpi-label">Total Tasks Added</div>
+    </div>
+
+    <div class="kpi-item">
+      <div class="kpi-bar" id="taskGraphBar"></div>
+      <div class="kpi-label">Tasks Graph</div>
+    </div>
+  </div>
+</section>
+
+
+      <section id="tasks" class="section hidden">
+        <h2>🛠️ Task Manager (Admin Only)</h2>
+        <div>
+          <input
+            type="password"
+            id="adminPass"
+            placeholder="Enter Admin Password"
+            onkeydown="if(event.key==='Enter'){unlockTasks()}"
+          />
+          <button onclick="unlockTasks()">Unlock</button>
+        </div>
+
+        <div id="taskPanel" class="hidden">
+          <h3>Add New Task</h3>
+          <input type="text" id="taskInput" placeholder="Enter a task..." />
+          <select id="prioritySelect">
+            <option>Low</option>
+            <option>Medium</option>
+            <option>High</option>
+          </select>
+          <button onclick="addTask()">Add Task</button>
+
+          <div class="task-controls">
+            <button id="viewHideBtn" onclick="toggleAllTasks()">View/Hide All Tasks</button>
+            <button onclick="deleteAllTasks()">Delete All Tasks</button>
+          </div>
+
+          <h3>Your Tasks</h3>
+          <ul id="taskList"></ul>
+        </div>
+      </section>
+
+      <section id="feedback" class="section hidden">
+        <h2>💬 Feedback / Notes</h2>
+        <textarea placeholder="Write your thoughts..."></textarea>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
